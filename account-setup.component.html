@@ -1,0 +1,25 @@
+<h2>User Details</h2>
+<h3>About Me</h3>
+<div><span>First Name: </span>{{user.firstName}}</div>
+<div>
+  <label for="firstName">First Name: </label>
+  <input id="firstName" [(ngModel)]="user.firstName" placeholder="first name">
+</div>
+
+<div><span>Last Name: </span>{{user.lastName}}</div>
+<div>
+  <label for="lastName">Last Name: </label>
+  <input id="lastName" [(ngModel)]="user.lastName" placeholder="last name">
+</div>
+
+<div><span>Address: </span>{{user.address}}</div>
+<div>
+  <label for="address">Address: </label>
+  <input id="address" [(ngModel)]="user.address" placeholder="address">
+</div>
+
+<h3>Physical Information</h3>
+
+<h3>Progress Goals</h3>
+
+<h3>Additional Data</h3>
