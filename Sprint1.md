@@ -1,5 +1,5 @@
-User Stories:
-
+<h2>User Stories:</h2>
+<ul>
 -As a backend developer, I want to implement a way to input basic data for a user, such as name, height, weight, and goals, and store these users in a data structure or data base so that we can keep track of users and have a more personalized experience for each user.
 
 People we are targeting are those who want to improve their lives in some way, and giving them user-friendly access to it with a somewhat personalized experience.
@@ -28,20 +28,32 @@ This feature will be implemented and known once the page is up and running and t
 
 -As a person who wants to improve my mental health, I want information and contacts to be provided for me in order to help with improving my mindset and to help ensure my safety.
 
+-A parent who has X many children, I would like to improve the relationship(s) that I maintain with my children in order to raise them to be independent, mature adults.
 
+-As a introvert who shys away from many conversations or social gatherings, I would like to step out of my comfort zone in order to expand my network and make lasting connections.
 
-Issues we planned to address:
+-As a world traveler who visits many countries with different languages, I would like to pick a new language in order to better interact with the people and the culture.
+
+-As a casual runner and full time worker, I would like to gain the endurance to complete an upcoming 5K run with my peers from work.
+
+-As a 30-something-year-old who is looking towards the future, I would like to start saving up money for retirement by age 75.
+
+-As someone who is unemployed and looking for employment, I would like to search for jobs that meet my qualification(s), offer good benefits, and an agreeable wage.
+
+</ul>
+
+<h2>Issues we planned to address:</h2>
 
   In this Sprint, we planned to address making user stories, to discuss how to provide these services on our website, and to begin development for our login and account
   sign-up pages by working on frontend and backend work individually. Our plan by the end of this sprint was to have a framework for the start of the account making process
   on the website so that we can implement everything else that follows it.
   
-Completed:
+<h2>Completed:</h2>
 
   Between the frontend and backend teams, we were able to successfully complete a frontend framework for the login page, and we started backend development on the account
   sign-up page. We were also able to successfully complete the user stories so we could have a solid idea on what aspects we want to implement on our site.
   
-Not Completed:
+<h2>Not Completed:</h2>
   
   While we were able to get some work done in both the front and backend, we didnt fully complete either the login or account sign-up pages. This was mostly due to a
   lack of communication between the front and backend, as we both decided to work on certain aspects without meeting up more than a few times, so we weren't able to
