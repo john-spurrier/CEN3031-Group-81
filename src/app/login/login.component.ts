@@ -3,7 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
-  template: `
+  template: 
+  `<h1>Login Page</h1>
     <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
       <div>
         <label for="username">Username:</label>
