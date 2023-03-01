@@ -1,5 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { AuthService } from '../auth.service';
+
 
 @Component({
   selector: 'app-login',
@@ -16,12 +19,13 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
       </div>
       <button type="submit" [disabled]="!loginForm.valid">Login</button>
     </form>
+    <button (click)="goToOtherPage()">Home Page</button>
   `,
 })
 export class LoginComponent {
   loginForm: FormGroup;
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private router: Router, private auth: AuthService) {
     this.loginForm = this.formBuilder.group({
       username: ['', Validators.required],
       password: ['', Validators.required],
@@ -31,5 +35,15 @@ export class LoginComponent {
   onSubmit() {
     // handle form submission here
     console.log(this.loginForm.value);
+    const { username, password } = this.loginForm.value;
+    this.auth.login(username, password).subscribe(
+      () => console.log('Login successful'),
+      error => console.error(error)
+    );
   }
+
+  goToOtherPage() {
+    this.router.navigateByUrl('https://www.youtube.com/');
+  }
+
 }
