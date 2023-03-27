@@ -10,7 +10,8 @@ import (
 )
 
 var db *gorm.DB
-var err error
+
+//var err error
 
 type User struct {
 	gorm.Model
@@ -30,7 +31,24 @@ func AllUsers(w http.ResponseWriter, r *http.Request) {
 }
 
 func NewUser(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "New User Endpoint hit")
+	fmt.Fprintf(w, "New User Endpoint \n")
+	w.Header().Set("Content-Type", "application/json")
+	var user *User
+	err := json.NewDecoder(r.Body).Decode(&user)
+	if err != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+	// Do something with the user object
+	fmt.Println(user.Username)
+	fmt.Println(user.Password)
+	//newUser := User{Username: user.Username, Password: user.Password}
+	//result := db.Create(&newUser)
+	//if result.Error != nil {
+	//	panic(result.Error)
+	//}
+	// Return a JSON response with the user object
+	json.NewEncoder(w).Encode(&user)
 }
 
 func DeleteUser(w http.ResponseWriter, r *http.Request) {
