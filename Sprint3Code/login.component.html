@@ -1,0 +1,18 @@
+<h1>Login Page</h1>
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <div>
+    <label for="username">Username:</label>
+    <input type="text" id="username" formControlName="username">
+  </div>
+  <div>
+    <label for="password">Password:</label>
+    <input type="password" id="password" formControlName="password">
+  </div>
+  <button type="submit" [disabled]="!loginForm.valid">Login</button>
+  <div>
+    <p>Don't have an account? <a href="register">Sign up</a>
+    </p>
+  </div>
+
+</form>
+<script src="login.component.ts"></script>
