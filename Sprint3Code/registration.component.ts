@@ -15,6 +15,9 @@ export class RegistrationComponent {
     email: '',
     password: '',
     confirmPassword: ''
+    package1: false,
+    package2: false,
+    package3: false
   };
   
 
