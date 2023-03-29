@@ -1,0 +1,68 @@
+<div>
+    <form (ngSubmit)="onSubmit()" #creditCardForm="ngForm">
+      <div>
+        <label for="credit-card">Credit Card Number:</label>
+        <input type="text" id="credit-card" name="credit-card" [(ngModel)]="creditCardNumber" pattern="[0-9]{16}" required #creditCardInput="ngModel">
+        <div *ngIf="creditCardInput.invalid && (creditCardInput.dirty || creditCardInput.touched)">
+            <div *ngIf="creditCardInput?.errors?.['required']">Credit card number is required</div>
+
+          <div *ngIf="creditCardInput.errors?.['pattern']">
+            Credit card number must be 16 digits.
+          </div>
+        </div>
+      </div>
+  
+      <div>
+        <label for="security-code">Security Code:</label>
+        <input type="text" id="security-code" name="security-code" [(ngModel)]="securityCode" pattern="[0-9]{3}" required #securityCodeInput="ngModel">
+        <div *ngIf="securityCodeInput.invalid && (securityCodeInput.dirty || securityCodeInput.touched)">
+          <div *ngIf="securityCodeInput.errors?.['required']">
+            Security code is required.
+          </div>
+          <div *ngIf="securityCodeInput.errors?.['pattern']">
+            Security code must be 3 digits.
+          </div>
+        </div>
+      </div>
+  
+      <div>
+        <label for="expiration-month">Expiration Month:</label>
+        <select id="expiration-month" name="expiration-month" [(ngModel)]="expirationMonth" required #expirationMonthInput="ngModel">
+          <option value="">--Please choose an option--</option>
+          <option value="01">January</option>
+          <option value="02">February</option>
+          <option value="03">March</option>
+          <option value="04">April</option>
+          <option value="05">May</option>
+          <option value="06">June</option>
+          <option value="07">July</option>
+          <option value="08">August</option>
+          <option value="09">September</option>
+          <option value="10">October</option>
+          <option value="11">November</option>
+          <option value="12">December</option>
+        </select>
+        <div *ngIf="expirationMonthInput.invalid && (expirationMonthInput.dirty || expirationMonthInput.touched)">
+          <div *ngIf="expirationMonthInput.errors?.['required']">
+            Expiration month is required.
+          </div>
+        </div>
+      </div>
+  
+      <div>
+        <label for="expiration-year">Expiration Year(YY):</label>
+        <input type="text" id="expiration-year" name="expiration-year" [(ngModel)]="expirationYear" pattern="[0-9]{2}" required #expirationYearInput="ngModel">
+        <div *ngIf="expirationYearInput.invalid && (expirationYearInput.dirty || expirationYearInput.touched)">
+          <div *ngIf="expirationYearInput.errors?.['required']">
+            Expiration year is required.
+          </div>
+          <div *ngIf="expirationYearInput.errors?.['pattern']">
+            Expiration year must be 2 digits.
+          </div>
+        </div>
+      </div>
+  
+      <button type="submit" [disabled]="!creditCardForm.form.valid">Submit</button>
+    </form>
+  </div>
+  
