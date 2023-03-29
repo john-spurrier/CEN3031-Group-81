@@ -1,0 +1,16 @@
+<h2>Products</h2>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<a routerLink="/cart"><button style="font-size:24px" >Checkout <i class="fa fa-shopping-cart"></i></button></a>
+
+<div *ngFor="let product of products">
+  <h3>{{ product.name }}</h3>
+  <h4>{{ product.price | currency }}</h4>
+  <p>{{ product.description }}</p>
+  <button type="button" (click)="addToCart(product)">Buy</button>
+  <button type="button" (click)="share()">Share</button>
+
+</div>
+<p></p>
+
