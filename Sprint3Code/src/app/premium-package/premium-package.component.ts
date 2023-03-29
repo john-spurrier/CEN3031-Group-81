@@ -8,8 +8,8 @@ import { Component } from '@angular/core';
 export class PremiumPackageComponent {
   title = 'Premium Package';
   subtitle = 'Get access to the ultimate life coaching program';
-  imageSrc = 'https://i.kym-cdn.com/entries/icons/original/000/025/930/unknown_(2)(Photo)(noise_scale)(Level3)(width_800)(16bit).png';
-  description = 'Everything from the intermediate package but more! Adds a personalized workout program, food and macro calculations, and even direct connection to real life coaches who can meet with you and help with any other needs. The ultimate package!';
+  imageSrc = 'https://example.com/premium-package-image.jpg';
+  description = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed vitae erat vitae quam blandit malesuada quis sit amet tellus. Sed quis justo ac tortor mattis blandit. Donec at eros lorem.';
 
   // Add more properties as needed
 }

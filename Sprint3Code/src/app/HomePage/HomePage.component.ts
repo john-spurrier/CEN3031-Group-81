@@ -6,7 +6,6 @@ import {Component, Inject, Injectable} from '@angular/core';
   styleUrls: ['./HomePage.component.css']
 })
 
-
 export class HomePageComponent {
     constructor() {
       const element = document.getElementById("contact");
@@ -19,16 +18,8 @@ export class HomePageComponent {
       const name = form.elements.namedItem("name") as HTMLInputElement;
       const email = form.elements.namedItem("email") as HTMLInputElement;
       const message = form.elements.namedItem("message") as HTMLTextAreaElement;
-
-      function notFilled() {
-        window.alert("Please fill out all fields.");
-      }
-      function successfulSubmit() {
-        window.alert("Form submitted successfully!")
-      }
-
       if (!name.value || !email.value || !message.value) {
-        notFilled();
+        alert("Please fill out all fields.");
         return;
       }
       try {
@@ -44,9 +35,9 @@ export class HomePageComponent {
           })
         });
         if (response.ok) {
-          successfulSubmit();
-          window.location.href="/thanks";
           form.reset();
+          window.location.href="/thanks";
+          alert("Form submitted successfully!");
         } else {
           throw new Error("Failed to submit form.");
         }
