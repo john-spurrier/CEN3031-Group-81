@@ -1,20 +1,30 @@
-<form #registrationForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
-    <div class="form-group">
-      <label for="name">Name:</label>
-      <input type="text" class="form-control" id="name" name="name" [(ngModel)]="user.name" required>
-    </div>
-    <div class="form-group">
-      <label for="email">Email:</label>
-      <input type="email" class="form-control" id="email" name="email" [(ngModel)]="user.email" required>
-    </div>
-    <div class="form-group">
-      <label for="password">Password:</label>
-      <input type="password" class="form-control" id="password" name="password" [(ngModel)]="user.password" required>
-    </div>
-    <div class="form-group">
-      <label for="confirmPassword">Confirm Password:</label>
-      <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" [(ngModel)]="user.confirmPassword" required>
-    </div>
-    <button type="submit" class="btn btn-primary" [disabled]="registrationForm.invalid || user.password !== user.confirmPassword">Submit</button>
-  </form>
-  
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="registration.component.css">
+    <title>Register Page</title>
+</head>
+<body>
+    <form #registrationForm="ngForm" (ngSubmit)="onSubmit()" novalidate>
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" class="form-control" id="name" name="name" [(ngModel)]="user.name" required>
+        </div>
+        <div class="form-group">
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" id="email" name="email" [(ngModel)]="user.email" required>
+        </div>
+        <div class="form-group">
+            <label for="password">Password:</label>
+            <input type="password" class="form-control" id="password" name="password" [(ngModel)]="user.password" required>
+        </div>
+        <div class="form-group">
+            <label for="confirmPassword">Confirm Password:</label>
+            <input type="password" class="form-control" id="confirmPassword" name="confirmPassword" [(ngModel)]="user.confirmPassword" required>
+        </div>
+        <button type="submit" class="btn btn-primary" [disabled]="registrationForm.invalid || user.password !== user.confirmPassword">Submit</button>
+    </form>
+</body>
+</html>
