@@ -48,6 +48,7 @@ func NewUser(w http.ResponseWriter, r *http.Request) {
 	//	panic(result.Error)
 	//}
 	// Return a JSON response with the user object
+	db.Create(&User{Username: user.Username, Password: user.Password})
 	json.NewEncoder(w).Encode(&user)
 }
 
@@ -61,6 +62,7 @@ func UpdateUser(w http.ResponseWriter, r *http.Request) {
 
 func loginHandler(w http.ResponseWriter, r *http.Request) {
 	// Parse the request body to get the username and password
+	w.Header().Set("Content-Type", "application/json")
 	decoder := json.NewDecoder(r.Body)
 	var credentials struct {
 		Username string `json:"username"`
@@ -76,9 +78,9 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 	// ...
 	var user User
 	var validCredentials bool
-	result := db.Where("username = ? AND password = ?", "janedoe", "pass123").First(&user)
+	result := db.Where("username = ? AND password = ?", credentials.Username, credentials.Password).First(&user)
 	if result.Error != nil {
-		panic(result.Error)
+		fmt.Println(result.Error)
 	}
 	if result.RowsAffected == 0 {
 		// User not found or password incorrect
@@ -90,9 +92,9 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 	// Return a response indicating success or failure
 	if validCredentials {
 		w.WriteHeader(http.StatusOK)
-		fmt.Fprint(w, "Login successful")
+		fmt.Fprint(w, "\"Login successful\"")
 	} else {
 		w.WriteHeader(http.StatusUnauthorized)
-		fmt.Fprint(w, "Invalid username or password")
+		fmt.Fprint(w, "\"Invalid username or password\"")
 	}
 }
