@@ -14,7 +14,7 @@ export class RegistrationComponent {
     name: '',
     email: '',
     password: '',
-    confirmPassword: ''
+    confirmPassword: '',
     package1: false,
     package2: false,
     package3: false
