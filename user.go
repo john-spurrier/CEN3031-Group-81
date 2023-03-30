@@ -88,6 +88,9 @@ func DeleteUser(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusBadGateway)
 		fmt.Fprint(w, "\"Record Didn't Delete Properly\"")
 		return
+	} else {
+		w.WriteHeader(http.StatusOK)
+		fmt.Fprint(w, "\"Record Deleted Successfully\"")
 	}
 
 }
