@@ -16,7 +16,11 @@ var db *gorm.DB
 type User struct {
 	gorm.Model
 	Username string `json:"username"`
+	Email    string `json:"email"`
 	Password string `json:"password"`
+	Package1 bool   `json:"package1"`
+	Package2 bool   `json:"package2"`
+	Package3 bool   `json:"package3"`
 }
 
 func AllUsers(w http.ResponseWriter, r *http.Request) {
@@ -54,10 +58,51 @@ func NewUser(w http.ResponseWriter, r *http.Request) {
 
 func DeleteUser(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprintf(w, "Delete User Endpoint Hit")
+	// Parse the request body to get the username and password
+	w.Header().Set("Content-Type", "application/json")
+	decoder := json.NewDecoder(r.Body)
+	var credentials struct {
+		Username string `json:"username"`
+		Password string `json:"password"`
+	}
+	err := decoder.Decode(&credentials)
+	if err != nil {
+		http.Error(w, "Invalid request body", http.StatusBadRequest)
+		return
+	}
+	var tempUser *User
+	res := db.Where("username = ? AND password = ?", credentials.Username, credentials.Password).First(&tempUser)
+	if res.Error == gorm.ErrRecordNotFound {
+		w.WriteHeader(http.StatusNotFound)
+		fmt.Fprint(w, "\"Record Not Found\"")
+		return
+	}
+	res2 := db.Delete(&tempUser).Error
+	if res2 != nil {
+		w.WriteHeader(http.StatusBadGateway)
+		fmt.Fprint(w, "\"Record Didn't Delete Properly\"")
+		return
+	}
+
 }
 
 func UpdateUser(w http.ResponseWriter, r *http.Request) {
 	fmt.Fprint(w, "Update User Endpoint Hit")
+	// Parse the request body to get the username and password
+	w.Header().Set("Content-Type", "application/json")
+	decoder := json.NewDecoder(r.Body)
+	var targetUser User
+	var tempUser *User
+	err := decoder.Decode(&targetUser)
+	if err != nil {
+		http.Error(w, "Invalid request body", http.StatusBadRequest)
+		return
+	}
+	// search the user from the database
+	db.Where("username = ? AND password = ?", targetUser.Username, targetUser.Password).First(&tempUser)
+	// use tempUser ptr to update it respective values
+	db.Model(&tempUser).Updates(User{Package1: targetUser.Package1, Package2: targetUser.Package2, Package3: targetUser.Package3})
+
 }
 
 func loginHandler(w http.ResponseWriter, r *http.Request) {
