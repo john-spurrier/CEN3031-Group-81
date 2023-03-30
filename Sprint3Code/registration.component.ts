@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 
@@ -11,7 +12,7 @@ export class RegistrationComponent {
   registrationForm: FormGroup;
 
   user = {
-    name: '',
+    username: '',
     email: '',
     password: '',
     confirmPassword: '',
@@ -21,7 +22,7 @@ export class RegistrationComponent {
   };
   
 
-  constructor(private formBuilder: FormBuilder) {
+  constructor(private formBuilder: FormBuilder, private http : HttpClient) {
     this.registrationForm = this.formBuilder.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
@@ -33,6 +34,17 @@ export class RegistrationComponent {
   }
 
   onSubmit() {
+   var address = 'http://localhost:8080/user/' + this.user.username + "/" + this.user.email
+    this.http.post(address, this.user).subscribe(
+        response => {
+         console.log('Post request successful:', response);
+         alert("Registration successful, procceding to next page.");
+      },
+      error => {
+        console.error('Unauthorized user', error); 
+        alert("Registration unsuccessful, please renter credentials");
+      }
+  );
     if (this.user.password !== this.user.confirmPassword) {
       alert('Passwords do not match!');
       return;
