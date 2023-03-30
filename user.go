@@ -30,7 +30,13 @@ func AllUsers(w http.ResponseWriter, r *http.Request) {
 	}
 
 	var users []User
-	db.Find(&users)
+	res := db.Find(&users)
+	if res.Error != nil {
+		// send an error to the frontend if command does not work
+		w.WriteHeader(http.StatusBadRequest)
+	} else {
+		w.WriteHeader(http.StatusOK)
+	}
 	json.NewEncoder(w).Encode(users)
 }
 
@@ -44,8 +50,8 @@ func NewUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	// Do something with the user object
-	fmt.Println(user.Username)
-	fmt.Println(user.Password)
+	//fmt.Println(user.Username)
+	//fmt.Println(user.Password)
 	//newUser := User{Username: user.Username, Password: user.Password}
 	//result := db.Create(&newUser)
 	//if result.Error != nil {
@@ -87,7 +93,6 @@ func DeleteUser(w http.ResponseWriter, r *http.Request) {
 }
 
 func UpdateUser(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprint(w, "Update User Endpoint Hit")
 	// Parse the request body to get the username and password
 	w.Header().Set("Content-Type", "application/json")
 	decoder := json.NewDecoder(r.Body)
@@ -101,8 +106,14 @@ func UpdateUser(w http.ResponseWriter, r *http.Request) {
 	// search the user from the database
 	db.Where("username = ? AND password = ?", targetUser.Username, targetUser.Password).First(&tempUser)
 	// use tempUser ptr to update it respective values
-	db.Model(&tempUser).Updates(User{Package1: targetUser.Package1, Package2: targetUser.Package2, Package3: targetUser.Package3})
-
+	res := db.Model(&tempUser).Updates(User{Package1: targetUser.Package1, Package2: targetUser.Package2, Package3: targetUser.Package3})
+	if res.Error != nil {
+		w.WriteHeader(http.StatusBadRequest)
+		fmt.Fprint(w, "\"Update Error\"")
+	} else {
+		w.WriteHeader(http.StatusOK)
+		fmt.Fprint(w, "\"User Successfully Updated\"")
+	}
 }
 
 func loginHandler(w http.ResponseWriter, r *http.Request) {
@@ -118,6 +129,8 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "Invalid request body", http.StatusBadRequest)
 		return
 	}
+	//fmt.Println(credentials.Username)
+	//fmt.Println(credentials.Password)
 
 	// Check the credentials against the database
 	// ...
