@@ -7,8 +7,13 @@ primarily 2 aspects, the packages, and the registration. For the packages, we se
       <li>Cypress Testing to confirm all links open to where they are routed to as well as using the spec.ts anular karma testing to make sure all text is coming up as it should in each compnent and that all text boxes and drop down selections are working and sending to the database/console./li>
   </ul>
  <h2>List of Backend Unit Tests</h2>
-  <ul>  
-    <li>Example Item</li>
+   <ul>  
+    <li>Test Main: This function sets up the database and runs the other tests. It tests the connection to the database and migration of the user table.</li>
+  <li>TestNewUser: This function tests the creation of a new user through the NewUser function. It sends an HTTP POST request to the "/users" endpoint with a username and password in the request body. It checks if the response status code is http.StatusOK and if the response body contains the expected response message.</li>
+  <li>TestLoginHandler: This function tests the user login functionality through the loginHandler function. It sends an HTTP POST request to the "/login" endpoint with a username and password in the request body. It checks if the response status code is http.StatusOK and if the response body contains the expected response message.</li>
+  <li>TestUpdateUser: This function tests the user update functionality through the UpdateUser function. It sends an HTTP PUT request to the "/user/{username}/{email}" endpoint with a new username, email, and password in the request body. It checks if the response status code is http.StatusOK and if the response body contains the expected response message.
+</li>
+  <li>TestAllUsers: This function tests the retrieval of all users through the AllUsers function. It sends an HTTP GET request to the "/users" endpoint. It checks if the response status code is http.StatusOK. The JSON response check is omitted due to the variability/volatility of the database.</li>
   </ul>
 <h2>Documentation for Backend API</h2>
 <p>
