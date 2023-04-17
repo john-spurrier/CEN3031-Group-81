@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/http"
 
+	"golang.org/x/crypto/bcrypt"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 )
@@ -41,7 +42,7 @@ func AllUsers(w http.ResponseWriter, r *http.Request) {
 }
 
 func NewUser(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "New User Endpoint \n")
+	//fmt.Fprintf(w, "New User Endpoint \n")
 	w.Header().Set("Content-Type", "application/json")
 	var user *User
 	err := json.NewDecoder(r.Body).Decode(&user)
@@ -58,12 +59,22 @@ func NewUser(w http.ResponseWriter, r *http.Request) {
 	//	panic(result.Error)
 	//}
 	// Return a JSON response with the user object
-	db.Create(&User{Username: user.Username, Password: user.Password})
+
+	// Generate a hash for the given password to feed into the database
+	// func GenerateFromPassword(password []byte, cost int) ([]byte, error)
+	hash, err1 := bcrypt.GenerateFromPassword([]byte(user.Password), 12)
+	// Return an error indicate that the hashing was unsuccessful
+	if err1 != nil {
+		http.Error(w, err.Error(), http.StatusBadRequest)
+		return
+	}
+	// Pass in the hash to the database
+	db.Create(&User{Username: user.Username, Email: user.Email, Password: string(hash)})
 	json.NewEncoder(w).Encode(&user)
 }
 
 func DeleteUser(w http.ResponseWriter, r *http.Request) {
-	fmt.Fprintf(w, "Delete User Endpoint Hit")
+	//fmt.Fprintf(w, "Delete User Endpoint Hit")
 	// Parse the request body to get the username and password
 	w.Header().Set("Content-Type", "application/json")
 	decoder := json.NewDecoder(r.Body)
@@ -107,7 +118,8 @@ func UpdateUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	// search the user from the database
-	db.Where("username = ? AND password = ?", targetUser.Username, targetUser.Password).First(&tempUser)
+	// use on the username since usernames must be unique
+	db.Where("username = ?", targetUser.Username).First(&tempUser)
 	// use tempUser ptr to update it respective values
 	res := db.Model(&tempUser).Updates(User{Package1: targetUser.Package1, Package2: targetUser.Package2, Package3: targetUser.Package3})
 	if res.Error != nil {
@@ -139,7 +151,7 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 	// ...
 	var user User
 	var validCredentials bool
-	result := db.Where("username = ? AND password = ?", credentials.Username, credentials.Password).First(&user)
+	result := db.Where("username = ?", credentials.Username).First(&user)
 	if result.Error != nil {
 		fmt.Println(result.Error)
 	}
@@ -147,8 +159,15 @@ func loginHandler(w http.ResponseWriter, r *http.Request) {
 		// User not found or password incorrect
 		validCredentials = false
 	} else {
-		// User found and password correct
-		validCredentials = true
+		// convert to byte array since hash is stored as string in database
+		err1 := bcrypt.CompareHashAndPassword([]byte(user.Password), []byte(credentials.Password))
+		// hash has not been found since error was returned
+		if err1 != nil {
+			validCredentials = false
+		} else {
+			// hash has been found
+			validCredentials = true
+		}
 	}
 	// Return a response indicating success or failure
 	if validCredentials {
