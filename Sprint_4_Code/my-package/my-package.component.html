@@ -1,1 +1,33 @@
-<p>my-package works!</p>
+<button (click)="clearProductState()">Sell My Package</button>
+
+<ng-container *ngIf="isPackage3; then package3Content else package2or1Content">
+</ng-container>
+
+<ng-template #package2or1Content>
+  <ng-container *ngIf="isPackage2; then package2Content else isPackage1Content">
+  </ng-container>
+</ng-template>
+
+<ng-template #isPackage1Content>
+    <ng-container *ngIf="isPackage1; then package1Content else noPackage">
+    </ng-container>
+</ng-template>
+
+<ng-template #noPackage>
+  <p>Hmm, it seems you don't have any packages. Please visit the shop page to purchase a package that suits your needs.</p>
+</ng-template>
+<ng-template #package1Content>
+  <p>Package 1 is selected</p>
+</ng-template>
+<ng-template #package2Content>
+  <p>Package 2 is selected</p>
+</ng-template>
+<ng-template #package3Content>
+  <p>Package 3 is selected</p>
+</ng-template>
+
+
+
+
+
+

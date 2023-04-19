@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { CartComponent } from "../cart/cart.component";
 import {CartService} from "../cart.service";
 import {Product} from "../product";
+import {PackageService} from "../package.service";
 
 @Component({
   selector: 'app-credit-page',
@@ -14,8 +15,23 @@ export class CreditPageComponent {
   expirationMonth: string = '';
   expirationYear: string = '';
   constructor(
-    private cartService: CartService
+    private cartService: CartService, private packageService: PackageService
   ) { }
+
+  ngOnInit() {
+    const products: Product[] = this.cartService.getItems();
+    for (let i = 0; i < products.length; i++) {
+      if (products[i].id === 1) {
+        this.packageService.setPackage1(true);
+      }
+      else if (products[i].id === 2){
+        this.packageService.setPackage2(true);
+      }
+      else if (products[i].id === 3){
+        this.packageService.setPackage3(true);
+      }
+    }
+  }
 
   onSubmit(): void {
     if (this.isFormValid()) {
