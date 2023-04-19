@@ -50,7 +50,12 @@ export class LoginComponent {
       this.errorMessage = '';
       this.loggedIn = this.authService.isLoggedIn;
       // Navigate to the homepage after successful login
-      
+      this.router.navigate([''])
+      window.location.href = '';
+      window.onload = function(){
+          location.reload();
+      }
+      ;
       
     
 

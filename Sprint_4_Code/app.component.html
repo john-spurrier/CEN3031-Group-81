@@ -18,7 +18,7 @@
       <li><a href = "shop">Store</a></li>
       <div *ngIf="isLoggedIn">
           <li>Welcome {{ username | slice:1:(username.length - 1) }}!</li>
-          <li><button (click)= 'setLogout()'>LogOut</button></li>
+          <li><button (click)= 'setLogout()' onclick = "window.location.href = '';">LogOut</button></li>
       </div>
       <div *ngIf="!isLoggedIn">
       <li><a href="login">Login</a></li>
