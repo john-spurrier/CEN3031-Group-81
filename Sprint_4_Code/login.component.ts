@@ -46,11 +46,12 @@ export class LoginComponent {
         }
       });*/
     console.log(this.loginForm.value);
-    this.authService.setLoggedIn(this.loginForm.value.username);
+    this.authService.setLoggedIn(this.submitted, this.loginForm.value.username);
       this.errorMessage = '';
-      this.loggedIn = this.authService.loggedIn;
+      this.loggedIn = this.authService.isLoggedIn;
       // Navigate to the homepage after successful login
-      this.router.navigate(['']);
+      
+      
     
 
   }
