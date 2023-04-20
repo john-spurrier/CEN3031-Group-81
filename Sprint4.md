@@ -43,4 +43,8 @@ CRUD functionality for managing user data and authentication.
   <li>DeleteUser: deletes a user from the database based on the username and password sent in the request body. Returns a response indicating success or failure. </li>
   <li>UpdateUser: updates a user in the database based on the username and password sent in the request body. Only the package status can be updated. Returns a response indicating success or failure. </li>
   <li>loginHandler: authenticates a user based on the username and password sent in the request body. Returns a response indicating success or failure. </li>
+  <h3>Bcrypt Password Hashing</h3>
+  <li>
+Bcrypt is a password hashing algorithm that converts plaintext passwords in hashes. Password hashing is a method used to store passwords in a secure way, by converting the password into a unique string of characters, called a hash. This is important because if a database containing user passwords is compromised, an attacker can use the passwords to gain access to user accounts. Hashing makes it difficult for attackers to obtain the actual passwords, as they are converted into an unintelligible format. Additionally, hashing algorithms are designed to be irreversible, meaning that it is difficult to determine the original password from the hash value, adding an extra layer of security.
+ main</li>
  </ul>
