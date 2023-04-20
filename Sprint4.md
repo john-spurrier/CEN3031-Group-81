@@ -7,7 +7,8 @@
 <p>Overall, while our website can still be infinitely expanded upon, the general framework for the site has been set up, and it includes all necessary functionality that is needed in order for it to be pitched. While the services provided can be improved, and the overall style and look of the site can be enhanced, the site works as intended, and uses the implementation described above to do so.</p>
 <h2>List of Frontend Unit Tests</h2>
   <ul>
-      <li></li>
+      <li>Login Spec Test to make sure Login in page can take in two and only submits when two</li>
+      <li>Credit Page Spec test to make sure submissions only go through when the guidlines for each field were met</li>
   </ul>
 <h2>List of Backend Unit Tests</h2>
    <ul>  
