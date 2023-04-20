@@ -29,6 +29,15 @@ and updating user data. Additionally, it includes a login endpoint that checks u
 a success or failure response. The API communicates via JSON and returns JSON-encoded responses. Overall, this API provides basic 
 CRUD functionality for managing user data and authentication.
  </p>
+ <h2>List of Backend Unit Tests</h2>
+   <ul>  
+    <li>Test Main: This function sets up the database and runs the other tests. It tests the connection to the database and migration of the user table.</li>
+  <li>TestNewUser: This function tests the creation of a new user through the NewUser function. It sends an HTTP POST request to the "/users" endpoint with a username and password in the request body. It checks if the response status code is http.StatusOK and if the response body contains the expected response message.</li>
+  <li>TestLoginHandler: This function tests the user login functionality through the loginHandler function. It sends an HTTP POST request to the "/login" endpoint with a username and password in the request body. It checks if the response status code is http.StatusOK and if the response body contains the expected response message.</li>
+  <li>TestUpdateUser: This function tests the user update functionality through the UpdateUser function. It sends an HTTP PUT request to the "/user/{username}/{email}" endpoint with a new username, email, and password in the request body. It checks if the response status code is http.StatusOK and if the response body contains the expected response message.
+</li>
+  <li>TestAllUsers: This function tests the retrieval of all users through the AllUsers function. It sends an HTTP GET request to the "/users" endpoint. It checks if the response status code is http.StatusOK. The JSON response check is omitted due to the variability/volatility of the database.</li>
+  </ul>
 <h4>List of Functions</h4>
 <ul>
   <li> AllUsers: retrieves all users from the database and returns them as JSON to the client. </li>
