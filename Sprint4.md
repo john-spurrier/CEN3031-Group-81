@@ -9,8 +9,12 @@
   <ul>
       <li></li>
   </ul>
- <h2>List of Backend Unit Tests</h2>
+<h2>List of Backend Unit Tests</h2>
    <ul>  
+    <li></li>
+   </ul>
+<h2>List of Cypress Tests</h2>
+   <ul>
     <li></li>
    </ul>
 <h2>Documentation for Backend API</h2>
