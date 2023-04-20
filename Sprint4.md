@@ -15,7 +15,10 @@
    </ul>
 <h2>List of Cypress Tests</h2>
    <ul>
-    <li></li>
+    <li>Login: Confirms the correct routing of the login button</li>
+    <li>Feedback: Confirms the correct output based on inputted information in the feedback form on the home page</li>
+    <li>Routing: Confirms correct routing from home page to other pages and back to the original page</li>
+    <li>Credit: Confirms the correct output of the credit page based on valid and invalid inputs</li>
    </ul>
 <h2>Documentation for Backend API</h2>
 <p>
