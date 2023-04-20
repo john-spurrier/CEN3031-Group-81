@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>My Package</title>
+    <link rel="stylesheet" href="my-package.component.css">
+  </head>
+  <body>
+
+<ng-container *ngIf="isPackage3; then package3Content else package2or1Content">
+</ng-container>
+
+<ng-template #package2or1Content>
+  <ng-container *ngIf="isPackage2; then package2Content else isPackage1Content">
+  </ng-container>
+</ng-template>
+
+<ng-template #isPackage1Content>
+    <ng-container *ngIf="isPackage1; then package1Content else noPackage">
+    </ng-container>
+</ng-template>
+
+<ng-template #noPackage>
+  <h1>Hmm, it seems you don't have any packages. Please visit the shop page to purchase a package that suits your needs.</h1>
+</ng-template>
+
+<ng-template #package1Content>
+  <div class="starter-package">
+
+    <div class="header">
+      <p></p>
+      <img src="https://thumbs.dreamstime.com/b/relaxed-black-man-meditating-alone-park-calm-relaxed-black-man-mustache-sitting-crossed-legs-holding-hands-136591238.jpg" alt="Header Image">
+    </div>
+
+    <h1>Welcome to the Starter Package!</h1>
+
+    <div class="videos">
+      <h2>Video Links for Self-Improvement</h2>
+      <ul>
+        <li><a href="https://www.youtube.com/watch?v=0foQiAJ3uHg">Video 1</a></li>
+        <li><a href="https://www.youtube.com/watch?v=uNYk4pKzPSY">Video 2</a></li>
+      </ul>
+    </div>
+
+    <div class="daily-tip">
+      <h2>Daily Tip</h2>
+      <p>Today's tip is: <strong>Do one thing that scares you every day.</strong></p>
+    </div>
+  </div>
+
+</ng-template>
+
+<ng-template #package2Content>
+  <div class="intermed-package">
+
+    <div class="header">
+      <p></p>
+      <img src="https://media.istockphoto.com/id/964719636/photo/planning-next-exercise.jpg?s=612x612&w=0&k=20&c=C2mn7pstCG3nr66Cdq3BNL_ELHicUtw18xJ0qi_9kKQ=" alt="Header Image">
+    </div>
+
+    <h1>Welcome to the Intermediate Package!</h1>
+
+    <div class="videos">
+      <h2>Video Links for Self-Improvement</h2>
+      <ul>
+        <li><a href="https://www.youtube.com/watch?v=0foQiAJ3uHg">Video 1</a></li>
+        <li><a href="https://www.youtube.com/watch?v=uNYk4pKzPSY">Video 2</a></li>
+        <li><a href="https://www.youtube.com/watch?v=Q_tJs-PMBiE">Video 3</a></li>
+        <li><a href="https://www.youtube.com/watch?v=SdKeoptiWn8">Video 4</a></li>
+      </ul>
+    </div>
+
+    <div class="daily-tip">
+      <h2>Daily Tip</h2>
+      <p>Today's tip is: <strong>Do one thing that scares you every day.</strong></p>
+    </div>
+
+    <div class="meal-plan">
+      <h2>Meal Plan</h2>
+      <ul>
+        <li>Breakfast: Whole-grain cereal with low-fat milk, sliced banana, and walnuts.</li>
+        <li>Lunch: Grilled chicken breast, mixed greens, cucumber, and tomato salad with olive oil and vinegar dressing.</li>
+        <li>Dinner: Baked salmon, brown rice, steamed broccoli, and carrots.</li>
+      </ul>
+    </div>
+
+    <div class="contact-trainer">
+      <h2>Contact a Trainer</h2>
+      <p>To schedule a personal training session or ask any questions, please contact us at <a href="mailto:trainer@yourwebsite.com">josephrbiden@selfgrow.com</a>.</p>
+    </div>
+
+  </div>
+</ng-template>
+
+<ng-template #package3Content>
+  <div class="premium-package">
+
+    <div class="header">
+      <p></p>
+      <img src="https://i0.wp.com/www.thebarbell.com/wp-content/uploads/2023/01/Cbum-2022-Olympia.png?fit=770%2C621&ssl=1" alt="Header Image">
+    </div>
+
+    <h1>Welcome to the Premium Package!</h1>
+
+    <div class="videos">
+      <h2>Video Links for Self-Improvement</h2>
+      <ul>
+        <li><a href="https://www.youtube.com/watch?v=0foQiAJ3uHg">Video 1</a></li>
+        <li><a href="https://www.youtube.com/watch?v=uNYk4pKzPSY">Video 2</a></li>
+        <li><a href="https://www.youtube.com/watch?v=Q_tJs-PMBiE">Video 3</a></li>
+        <li><a href="https://www.youtube.com/watch?v=SdKeoptiWn8">Video 4</a></li>
+      </ul>
+    </div>
+
+    <div class="daily-tip">
+      <h2>Daily Tip</h2>
+      <p>Today's tip is: <strong>Do one thing that scares you every day.</strong></p>
+    </div>
+
+    <div class="meal-plan">
+      <h2>Meal Plan</h2>
+      <ul>
+        <li>Breakfast: Whole-grain cereal with low-fat milk, sliced banana, and walnuts.</li>
+        <li>Lunch: Grilled chicken breast, mixed greens, cucumber, and tomato salad with olive oil and vinegar dressing.</li>
+        <li>Dinner: Baked salmon, brown rice, steamed broccoli, and carrots.</li>
+      </ul>
+    </div>
+
+    <div class="contact-trainer">
+      <h2>Contact a Trainer</h2>
+      <p>To schedule a personal training session or ask any questions, please contact us at <a href="mailto:trainer@yourwebsite.com">josephrbiden@selfgrow.com</a>.</p>
+    </div>
+
+    <div class="workout-plan">
+      <h2>Personalized Workout Plan</h2>
+      <ul>
+        <li>Monday: 30 minutes of cardio, followed by 3 sets of 10 reps of squats, lunges, and deadlifts</li>
+        <li>Tuesday: Rest day</li>
+        <li>Wednesday: 30 minutes of cardio, followed by 3 sets of 10 reps of bench press, rows, and pull-ups</li>
+        <li>Thursday: Rest day</li>
+        <li>Friday: 30 minutes of cardio, followed by 3 sets of 10 reps of bicep curls, tricep extensions, and shoulder press</li>
+        <li>Saturday: Rest day</li>
+        <li>Sunday: 30 minutes of cardio, followed by 3 sets of 10 reps of core exercises such as planks, crunches, and Russian twists</li>
+      </ul>
+    </div>
+
+    <div class="personal-trainer">
+      <h2>Work with a trainer right now!</h2>
+      <p>Want to speak to a trainer? Login to our live chat system <a href="https://www.coolmathgames.com/">here</a>.</p>
+    </div>
+
+    <div class="inspirational-msg">
+      <h2>Remember!</h2>
+      <p>The journey to a healthier and happier you is a marathon, not a sprint. Keep up the hard work and you will see results!</p>
+    </div>
+
+  </div>
+</ng-template>
+
+<button (click)="clearProductState()">Sell My Package</button>
+
+</body>
+</html>
+

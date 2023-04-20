@@ -1,0 +1,34 @@
+<h1>SelfGrow</h1>
+<!DOCTYPE html>
+<html>
+<head>
+  <title>SelfGrow</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="./HomePage/HomePage.component.css">
+</head>
+<body>
+<header>
+  <nav>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#testimonials">Testimonials</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href = "shop">Store</a></li>
+      <div *ngIf="isLoggedIn">
+          <li>Welcome {{ username | slice:1:(username.length - 1) }}!</li>
+          <li><button (click)= 'setLogout()' onclick = "window.location.href = '';">LogOut</button></li>
+      </div>
+      <div *ngIf="!isLoggedIn">
+      <li><a href="login">Login</a></li>
+      </div>
+      <li><a href = "package">My Packages</a></li>
+    </ul>
+  </nav>
+</header>
+</body>
+<router-outlet></router-outlet>
+<nav>
+  <button onclick="window.location.href = '';">Home</button>
+</nav>

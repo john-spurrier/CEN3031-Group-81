@@ -1,0 +1,20 @@
+<h3>Cart</h3>
+
+<div class="cart-item" *ngFor="let item of items">
+  <span>{{ item.name }} </span>
+  <span>{{ item.price | currency }}</span>
+</div>
+<div *ngIf="isPackage1">
+  Starter Package has been added to the cart
+</div>
+<div *ngIf="isPackage2">
+  Intermediate Package has been added to the cart
+</div>
+<div *ngIf="isPackage3">
+  Premium Package has been added to the cart
+</div>
+<p></p><p></p>
+<a routerLink="/credit"><button type="button">Pay</button></a>
+<p></p>
+
+
