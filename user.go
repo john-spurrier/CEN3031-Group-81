@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"net/http"
 
+	"regexp"
+
 	"golang.org/x/crypto/bcrypt"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
@@ -19,9 +21,20 @@ type User struct {
 	Username string `json:"username"`
 	Email    string `json:"email"`
 	Password string `json:"password"`
-	Package1 bool   `json:"package1"`
-	Package2 bool   `json:"package2"`
-	Package3 bool   `json:"package3"`
+	Package1 bool   `json:"isPackage1"`
+	Package2 bool   `json:"isPackage2"`
+	Package3 bool   `json:"isPackage3"`
+}
+
+// String Parser for Password Strength Requirements
+// Password must be at least eight characters long
+// Password must contain at least one uppercase letter
+// Password must contain at least on digit
+// Password Must Contain at least one special character
+
+func isStrongPassword(password string) bool {
+	regex := regexp.MustCompile(`^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$`)
+	return regex.MatchString(password)
 }
 
 func AllUsers(w http.ResponseWriter, r *http.Request) {
@@ -50,6 +63,12 @@ func NewUser(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, err.Error(), http.StatusBadRequest)
 		return
 	}
+
+	if !(isStrongPassword(user.Password)) {
+		http.Error(w, "Weak Password", http.StatusBadRequest)
+		return
+	}
+
 	// Do something with the user object
 	//fmt.Println(user.Username)
 	//fmt.Println(user.Password)
@@ -109,6 +128,7 @@ func DeleteUser(w http.ResponseWriter, r *http.Request) {
 func UpdateUser(w http.ResponseWriter, r *http.Request) {
 	// Parse the request body to get the username and password
 	w.Header().Set("Content-Type", "application/json")
+
 	decoder := json.NewDecoder(r.Body)
 	var targetUser User
 	var tempUser *User
@@ -119,7 +139,9 @@ func UpdateUser(w http.ResponseWriter, r *http.Request) {
 	}
 	// search the user from the database
 	// use on the username since usernames must be unique
-	db.Where("username = ?", targetUser.Username).First(&tempUser)
+	str := targetUser.Username
+	newStr := str[1 : len(str)-1]
+	db.Where("username = ?", newStr).First(&tempUser)
 	// use tempUser ptr to update it respective values
 	res := db.Model(&tempUser).Updates(User{Package1: targetUser.Package1, Package2: targetUser.Package2, Package3: targetUser.Package3})
 	if res.Error != nil {
