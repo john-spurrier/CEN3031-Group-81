@@ -52,7 +52,7 @@ func TestNewUser(t *testing.T) {
 	}
 
 	// Check the response body
-	expectedResponse := "New User Endpoint"
+	expectedResponse := "ID"
 	if !(strings.Contains(recorder.Body.String(), expectedResponse)) {
 		t.Errorf("Unexpected Behavior: got %v want %v", recorder.Body.String(), expectedResponse)
 	}
@@ -91,7 +91,7 @@ func TestUpdateUser(t *testing.T) {
 	// Generate an HTTP request using a JSON object as the body
 	requestBody := bytes.NewBufferString(`{"username":"janedoe","email":"jane@example.com","password":"pass123"}`)
 	// issue the http request using the test library
-	request, err := http.NewRequest("PUT", "/user/janedoe/jane@example.com", requestBody)
+	request, err := http.NewRequest("POST", "/update/janedoe", requestBody)
 	if err != nil {
 		t.Fatal(err)
 	}
